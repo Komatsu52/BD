@@ -1,0 +1,68 @@
+MATCH (a:Atleta), (b:CodigoPostal) 
+WHERE a.CodigoPostal_codigoPostal = b.codigoPostal 
+CREATE (a)-[:POSSUI]->(b) 
+
+MATCH (a:Atleta), (b:Modalidade) 
+WHERE a.Modalidade_idModalidade = b.idModalidade 
+CREATE (a)-[:PRATICA]->(b) 
+
+MATCH (a:Atleta), (b:TCAgendado) 
+WHERE a.idAtleta = b.Atleta_idAtleta 
+CREATE (a)-[:AGENDOU]->(b)
+ 
+MATCH (a:Atleta), (b:TCRealizado) 
+WHERE a.idAtleta = b.Atieta_idAtieta C
+REATE (a)-[:REALIZOU]->(b)
+
+MATCH (a:Clinica), (b:CodigoPostal) 
+WHERE a.CodigoPostal_codigoPostal = b.codigoPostal 
+CREATE (a)-[:POSSUI]->(b) 
+
+MATCH (a:Clinica), (b:Contacto) 
+WHERE a.idClinica = b.Clinica_idClinica 
+CREATE (a)-[:TEM]->(b) 
+
+MATCH (a:Clinica), (b:EquipamentoDisponivel) 
+WHERE a.idClinica = b.Clinica_idClinica 
+CREATE (a)-[:POSSUI]->(b) 
+
+MATCH (a:Clinica), (b:Medico) 
+WHERE a.idClinica = b.Clinica_idClinica 
+CREATE (a)-[:EMPREGA]->(b) 
+
+MATCH (a:Clinica), (b:TCAgendado) 
+WHERE a.idClinica = b.Clinica_idClinica 
+CREATE (a)-[:AGENDOU]->(b) 
+
+MATCH (a:Clinica), (b:TCRealizado) 
+WHERE a.idClinica = b.Clinica_idClinica 
+CREATE (a)-[:REALIZOU]->(b) 
+
+MATCH (a:EquipamentoDisponivel), (b:Equipamento) 
+WHERE a.Equipamento_idEquipamento = b.idEquipamento 
+CREATE (a)-[:E1->(b) 
+
+MATCH (a:Medico), (b:CodigoPostal) 
+WHERE a.CodigoPostal_codigoPostal = b.codigoPostal 
+CREATE (a)-[:POSSUI]->(b) 
+
+MATCH (a:Medico), (b:TCAgendado) 
+WHERE a.idMedico = b.Medico_idMedico 
+CREATE (a)-[:AGENDOU]->(b) 
+
+MATCH (a:Medico), (b:TCRealizado) 
+WHERE a.idMedico = b.Medico_idMedico 
+CREATE (a)-[:REALIZOU]->(b)
+
+MATCH (tcr:TCRealizado), (en:EquipamentoUtilizado), (e:EquipamentoDisponivel) 
+WHERE tcr.idTCRealizado = en.TCRealizado_idTCRealizado AND en.EquipamentoDisponivel_idEquipamentoDisponivel = e. idEquipamentoDisponivel 
+CREATE (tcr)-[:UTILIZOU]->(e) 
+
+MATCH (a:TCRealizado), (b:TesteClinico) 
+WHERE a.TesteClinico_idTesteClinico = b.idTesteClinico 
+CREATE (a)-[:EUM]->(b) 
+
+MATCH (tc:TesteClinico), (en:EquipamentoNecessario), (e:Equipamento) 
+WHERE tc.idTesteClinico = en.TesteClinico_idTesteClinico AND en.Equipamento_idEquipamento = e.idEquipamento 
+CREATE (tc)-[:NECESSITA]->(e) 
+

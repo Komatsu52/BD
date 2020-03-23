@@ -1,0 +1,5 @@
+MATCH (a:Atleta)-[:REALIZOU]->(tcr:TCRealizado)-[:ÉUM]->(tc:TesteClinico)
+WITH a.nome AS Nome
+WHERE tc.designacao = 'Eletrocardiograma'
+RETURN Nome, COUNT(Nome) AS Testes
+ORDER BY Nome

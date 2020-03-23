@@ -1,0 +1,6 @@
+MATCH (tcr:TCRealizado)-[:`ÉUM`]->(tc:TesteClinico)
+WITH apoc.date.parse(tcr.data, 's', 'yyyy-MM-dd HH:mm:ss') AS date, apoc.date.parse('2016-10-01 00:00:00', 's', 'yyyy-MM-dd HH:mm:ss') AS dateI, apoc.date.parse('2016-10-31 23:59:59', 's', 'yyyy-MM-dd HH:mm:ss') AS dateF, tc.designacao AS Teste
+WHERE date>dateI AND date<dateF
+RETURN Teste, COUNT(Teste) AS NúmeroTestes
+ORDER BY COUNT(Teste) DESC
+LIMIT 3

@@ -1,0 +1,5 @@
+MATCH (m:Medico)-[:REALIZOU]->(tcr:TCRealizado)-[:ÉUM]->(tc:TesteClinico)
+WITH m.nome AS Nome, apoc.date.parse(m.ddn,'s', 'yyyy-MM-dd HH:mm:ss') AS date, apoc.date.parse('1960-01-01 00:00:00','s', 'yyyy-MM-dd HH:mm:ss') AS dateI, apoc.date.parse('1975-12-31 23:59:59','s', 'yyyy-MM-dd HH:mm:ss') AS dateF
+WHERE tc.designacao = 'Urina' AND date>dateI AND date<dateF
+RETURN Nome, COUNT(Nome) AS Testes
+ORDER BY Nome

@@ -1,0 +1,60 @@
+//modalidade nodes 
+USING PERIODIC COMMIT 
+LOAD CSV FROM 'file://modalidade.csv' AS line 
+CREATE(c:Modalidade (idModalidade: toInteger(line[0]), nome: line[1], escalao: line[2])) 
+
+//atleta nodes 
+USING PERIODIC COMMIT 
+LOAD CSV FROM 'file://atleta.csv' AS line 
+CREATE(c:Atleta (idAtleta: toInteger(line[0]), email: line[1], password: line[2], nome: line[3], OCC: line[4], nif: line[5], ddn: line[6], genero: line[7], rua: line[8], CodigoPostal_codigoPostal: line[9], equipa: line[10], contacto: line[11], Modalidade_idModalidade: toInteger(line[12]))) 
+
+//TCAgendado nodes
+USING PERIODIC COMMIT LOAD CSV FROM 'file://tcagendado.csv' AS line 
+CREATE(c:TCAgendado fidTCAgendado: toInteger(line[0]), TesteClinico_idTesteClinico: tolnteger(line[1]), data: line[2], Atleta_idAtleta: tolnteger(line[3]), Clinica_idClinica: tolnteger(line[4]), Medico_idMedico: tolnteger(line[5])}) 
+
+//clinica nodes USING PERIODIC COMMIT
+ LOAD CSV FROM 'file://clinica.csv' AS line 
+CREATE(c:Clinica (idClinica: toInteger(line[0]), nome: line[1], rua: line[2], CodigoPostal_codigoPostal: line[3])) 
+
+//equipamentoNecessario nodes 
+USING PERIODIC COMMIT 
+LOAD CSV FROM 'file://equipamentonecessario.csv' AS line 
+CREATE(c:EquipamentoNecessario (TesteClinico_idTesteClinico: toInteger(line[0]), Equipamento_idEquipamento: tolnteger(line[1]))) 
+
+//codigoPostal nodes 
+USING PERIODIC COMMIT 
+LOAD CSV FROM 'file://codigopostal.csv' AS line CREATE(c:CodigoPostal (codigoPostal: line[0], cidade: line[1])) 
+
+//testeClinico nodes 
+USING PERIODIC COMMIT 
+LOAD CSV FROM 'file://testeclinico.csv' AS line 
+CREATE(c:TesteClinico fidTesteClinico: toInteger(line[0]), designacao: line[1], preco: toFloat(line[2]))) 
+
+//equipamento nodes 
+USING PERIODIC COMMIT 
+LOAD CSV FROM 'file://equipamento.csv' AS line 
+CREATE(c:Equipamento (idEquipamento: tolnteger(line[O]), nome: line[1])) 
+
+//medico nodes 
+USING PERIODIC COMMIT
+LOAD CSV FROM 'file://medico.csv' AS line 
+CREATE(c:Medico fidMedico: toInteger(line[0]), email: line[1], password: line[2], nome: line[3], OCC: line[4], cedula: line[5], ddn: line[6], genero: line[7], rua: line[8], CodigoPostal_codigoPostal: line[9], contacto: line[10], Clinica_idClinica: tolnteger(line[11]))) 
+
+//TCRealizado nodes 
+USING PERIODIC COMMIT 
+LOAD CSV FROM 'file://tcrealizado.csv' AS line 
+CREATE(c:TCRealizado fidTCRealizado: toInteger(line[0]), TesteClinico_idTesteClinico: toInteger(line[1]), data: line[2], Atleta_idAtleta: toInteger(line[3]), Clinica_idClinica: tolnteger(line[4]), Medico_idMedico: tolnteger(line[5]))) 
+
+//contacto nodes 
+USING PERIODIC COMMIT 
+LOAD CSV FROM 'file://contacto.csv' AS line 
+CREATE(c:Contacto (numero: line[0], Clinica_idClinica: tolnteger(line[1])}) 
+
+//equipamentoUtilizado nodes 
+USING PERIODIC COMMIT LOAD CSV FROM 'file://equipamentoutilizado.csv' AS line 
+CREATE(c:EquipamentoUtilizado {EquipamentoDisponivel_idEquipamentoDisponivel: toInteger(line[0]), TCRealizado_idICRealizado: toInteger(line[1]))) 
+
+//equipamentoDisponivel nodes
+USING PERIODIC COMMIT 
+LOAD CSV FROM 'file://equipamentodisponivel.csv' AS line 
+CREATE(c:EquipamentoDisponivel (idEquipamentoDisponivel: toInteger(line[0]), Equipamento_idEquipamento: toInteger(line[1]), Clinica_idClinica: tolnteger(line[2])}) 

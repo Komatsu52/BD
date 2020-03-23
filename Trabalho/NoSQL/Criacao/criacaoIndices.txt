@@ -1,0 +1,20 @@
+//clinica index 
+CREATE INDEX ON :Clinica(idClinica); 
+
+//atleta index
+CREATE INDEX ON :Atleta(nome); 
+
+//medico index 
+CREATE INDEX ON :Medico(nome): 
+
+//testeclinico index 
+CREATE INDEX ON :TesteClinico(designacao); 
+
+//tcagendado index 
+CREATE INDEX ON :TCAgendado(idTCAgendado); 
+
+//tcrealizado index 
+CREATE INDEX ON :TCRealizacao(idTCRealizado); 
+
+//equipamento index 
+CREATE INDEX ON :Equipamento(nome); 

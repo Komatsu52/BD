@@ -1,0 +1,5 @@
+MATCH (a:Atleta)
+WITH apoc.date.parse(a.ddn, 's', 'yyyy-MM-dd HH:mm:ss') AS Date, a.nome AS Nome, a.ddn AS DataNascimento
+RETURN Nome, DataNascimento
+ORDER BY Date DESC
+limit 1

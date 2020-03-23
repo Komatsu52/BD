@@ -1,0 +1,4 @@
+MATCH (m:Medico)-[:REALIZOU]->(:TCRealizado)
+WITH m.nome AS Nome
+RETURN Nome, COUNT(Nome) AS Testes
+ORDER BY Testes DESC
